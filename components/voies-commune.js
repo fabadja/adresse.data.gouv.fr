@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Router from 'next/router'
 
-import withFetch from '../../hoc/with-fetch'
+import withFetch from './hoc/with-fetch'
 
 import VoiesTable from './voies-table'
 
