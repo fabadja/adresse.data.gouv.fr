@@ -13,7 +13,6 @@ import Tag from '../../../../tag'
 import Header from '../header'
 import List from '../list'
 import Item from '../item'
-import ProducerDiscussion from '../producer-discussion'
 
 import Breadcrumb from './breadcrumb'
 import CommunePreview from './commune-preview'
@@ -46,7 +45,7 @@ class Commune extends React.Component {
 
   render() {
     const {dataset, commune, router} = this.props
-    const {id, title, organization, page} = dataset
+    const {id, title, organization} = dataset
     const {query} = router
 
     return (
@@ -101,7 +100,6 @@ class Commune extends React.Component {
           </div>
         </Section>
 
-        <ProducerDiscussion page={page} />
         <style jsx>{`
           h4 {
             background-color: ${theme.primary};
