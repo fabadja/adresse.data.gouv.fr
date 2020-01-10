@@ -39,7 +39,7 @@ class Voie extends React.Component {
             }}
             isPlaceName={voie.numerosCount === 0} />
 
-          <VoiePreview voie={voie} />
+          <VoiePreview voie={voie} dataset={dataset} />
         </Section>
 
       </div>

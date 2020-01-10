@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import Router from 'next/router'
 import PropTypes from 'prop-types'
 import computeBbox from '@turf/bbox'
 
@@ -11,11 +12,20 @@ import Tag from '../../../../../tag'
 import Mapbox from '../../../../../mapbox'
 
 import Item from '../../item'
+import AddressesTable from '../../../../../addresses-table'
 
-const VoiePreview = ({voie}) => {
+const VoiePreview = ({voie, dataset}) => {
   const [toponyme, setToponyme] = useState(null)
   const [numeros, setNumeros] = useState(null)
   const [bbox, setBbox] = useState(null)
+
+  const handleSelect = (numero, suffixe) => {
+    const {codeCommune, idVoie} = Router.query
+    const href = `/explore/commune/voie?codeCommune=${codeCommune}&idVoie=${idVoie}${numero ? `&numero=${numero}${suffixe || ''}` : ''}`
+    const as = `/bases-locales/jeux-de-donnees/${dataset.id}/${codeCommune}/${idVoie}${numero ? `/numero/${numero}${suffixe || ''}` : ''}`
+
+    Router.push(href, as)
+  }
 
   useEffect(() => {
     if (voie.position) {
@@ -59,6 +69,11 @@ const VoiePreview = ({voie}) => {
           </div>
         </>
       )}
+
+      <AddressesTable
+        addresses={voie.numeros}
+        numero={numeros}
+        onSelect={handleSelect} />
 
       {voie.numeros && voie.numeros.length && (
         <div>
@@ -143,7 +158,8 @@ const VoiePreview = ({voie}) => {
 }
 
 VoiePreview.propTypes = {
-  voie: PropTypes.object.isRequired
+  voie: PropTypes.object.isRequired,
+  dataset: PropTypes.object.isRequired
 }
 
 export default VoiePreview
