@@ -39,6 +39,10 @@ class VoiesTable extends React.Component {
       {title: 'Source'}
     ]
 
+    if (!voies[0].sourceNomVoie) {
+      headers.splice(2, 1)
+    }
+
     const genItems = voies => {
       return voies.map(voie => {
         return {
@@ -52,13 +56,25 @@ class VoiesTable extends React.Component {
       })
     }
 
+    const genItemsBal = voies => {
+      return voies.map(voie => {
+        return {
+          key: voie.idVoie,
+          values: [
+            voie.nomVoie,
+            voie.numerosCount === 0 ? (<NoPositionWarning check={voie.position} text={noPosition} />) : voie.numerosCount
+          ]
+        }
+      })
+    }
+
     return (
       <TableList
         title='Voies de la commune'
         subtitle={`${voies.length} voies répertoriées`}
         list={voies}
         headers={headers}
-        genItems={genItems}
+        genItems={voies[0].sourceNomVoie ? genItems : genItemsBal}
         initialSort={headers[0]}
         handleSelect={this.selectVoie} />
     )

@@ -41,14 +41,14 @@ class TableList extends React.Component {
       <div>
         <div className='filter-1'>
           <input className='search' type='text' value={text} placeholder='Rechercher…' onChange={this.handleChange} />
-          {sources &&
+          {sources.length > 0 ?
             <div className='tags'>
               <TagsInput
                 title='Sources'
                 tags={sources}
                 selected={selectedTags}
                 toggleTag={onFilterTags} />
-            </div>}
+            </div> : null}
         </div>
 
         <style jsx>{`
