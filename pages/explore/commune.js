@@ -9,7 +9,7 @@ import withErrors from '../../components/hoc/with-errors'
 
 import Header from '../../components/explorer/header'
 import Commune from '../../components/explorer/commune'
-import VoiesCommune from '../../components/voies-commune'
+import VoiesCommune from '../../components/explorer/commune/voies-commune'
 
 const contourToFeatureCollection = commune => {
   return {

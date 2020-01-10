@@ -4,7 +4,7 @@ import Router from 'next/router'
 
 import Section from '../../section'
 
-import AddressesTable from '../../addresses-table'
+import AddressesTable from './addresses-table'
 import Head from './head'
 import MapContainer from './map-container'
 

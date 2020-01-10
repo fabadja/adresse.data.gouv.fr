@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import Router from 'next/router'
 import PropTypes from 'prop-types'
 import computeBbox from '@turf/bbox'
 
@@ -14,18 +13,11 @@ import Mapbox from '../../../../../mapbox'
 import Item from '../../item'
 import AddressesTable from '../../../../../addresses-table'
 
-const VoiePreview = ({voie, dataset}) => {
+const VoiePreview = ({voie}) => {
   const [toponyme, setToponyme] = useState(null)
   const [numeros, setNumeros] = useState(null)
+  console.log("TCL: VoiePreview -> numeros", numeros)
   const [bbox, setBbox] = useState(null)
-
-  const handleSelect = (numero, suffixe) => {
-    const {codeCommune, idVoie} = Router.query
-    const href = `/explore/commune/voie?codeCommune=${codeCommune}&idVoie=${idVoie}${numero ? `&numero=${numero}${suffixe || ''}` : ''}`
-    const as = `/bases-locales/jeux-de-donnees/${dataset.id}/${codeCommune}/${idVoie}${numero ? `/numero/${numero}${suffixe || ''}` : ''}`
-
-    Router.push(href, as)
-  }
 
   useEffect(() => {
     if (voie.position) {
@@ -72,8 +64,8 @@ const VoiePreview = ({voie, dataset}) => {
 
       <AddressesTable
         addresses={voie.numeros}
-        numero={numeros}
-        onSelect={handleSelect} />
+        numero={voie.numeros.numero}
+      />
 
       {voie.numeros && voie.numeros.length && (
         <div>
@@ -158,8 +150,7 @@ const VoiePreview = ({voie, dataset}) => {
 }
 
 VoiePreview.propTypes = {
-  voie: PropTypes.object.isRequired,
-  dataset: PropTypes.object.isRequired
+  voie: PropTypes.object.isRequired
 }
 
 export default VoiePreview

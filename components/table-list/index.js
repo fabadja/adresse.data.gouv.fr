@@ -95,7 +95,9 @@ const TableList = ({title, list, headers, genItems, subtitle, initialSort, selec
 
 TableList.propTypes = {
   title: PropTypes.string.isRequired,
-  list: PropTypes.array.isRequired,
+  list: PropTypes.arrayOf(PropTypes.shape({
+    sources: PropTypes.array.isRequired
+  })).isRequired,
   headers: PropTypes.array.isRequired,
   genItems: PropTypes.func.isRequired,
   subtitle: PropTypes.string,

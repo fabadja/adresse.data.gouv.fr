@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {getTypeByPriority} from '../lib/types'
+import {getTypeByPriority} from '../../../lib/types'
 
-import {tagsList} from '../lib/table'
+import {tagsList} from '../../../lib/table'
 
-import TableList from './table-list'
-import NoPositionWarning from './no-position-warning'
+import TableList from '../../table-list'
+import NoPositionWarning from '../../no-position-warning'
 
 class VoiesTable extends React.Component {
   static propTypes = {
