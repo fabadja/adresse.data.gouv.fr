@@ -8,18 +8,31 @@ import VoiesTable from './voies-table'
 
 class VoiesCommune extends React.Component {
   static propTypes = {
-    voies: PropTypes.array
+    commune: PropTypes.object.isRequired,
+    voies: PropTypes.array,
+    query: PropTypes.string
   }
 
   static defaultProps = {
-    voies: []
+    voies: [],
+    query: null
   }
 
   handleSelect = voie => {
-    Router.push(
-      `/commune/voie?idVoie=${voie.idVoie}`,
-      `/explore/commune/${voie.codeCommune}/voie/${voie.idVoie}`
-    )
+    if (this.props.query) {
+      if (voie.numerosCount === 0 && !voie.position) {
+        return null
+      }
+
+      Router.push(
+        `/bases-locales/jeux-de-donnees/${this.props.query}/${this.props.commune.code}/${voie.codeVoie}`
+      )
+    } else if (!voie.codeVoie) {
+      Router.push(
+        `/commune/voie?idVoie=${voie.idVoie}`,
+        `/explore/commune/${this.props.commune.code}/voie/${voie.idVoie}`
+      )
+    }
   }
 
   render() {

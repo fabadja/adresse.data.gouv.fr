@@ -6,6 +6,7 @@ import {getTypeByPriority} from '../lib/types'
 import {tagsList} from '../lib/table'
 
 import TableList from './table-list'
+import NoPositionWarning from './no-position-warning'
 
 class VoiesTable extends React.Component {
   static propTypes = {
@@ -23,6 +24,7 @@ class VoiesTable extends React.Component {
 
   render() {
     const {voies} = this.props
+    const noPosition = 'Ce lieu nommé ne possède pas encore de position renseignée.'
     const headers = [
       {
         title: 'Nom de voie',
@@ -43,7 +45,7 @@ class VoiesTable extends React.Component {
           key: voie.idVoie,
           values: [
             voie.nomVoie,
-            voie.numerosCount,
+            voie.numerosCount === 0 ? (<NoPositionWarning check={voie.position} text={noPosition} />) : voie.numerosCount,
             tagsList(getTypeByPriority(voie.sources))
           ]
         }
