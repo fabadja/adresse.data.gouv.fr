@@ -16,7 +16,6 @@ import AddressesTable from '../../../../../addresses-table'
 const VoiePreview = ({voie}) => {
   const [toponyme, setToponyme] = useState(null)
   const [numeros, setNumeros] = useState(null)
-  console.log("TCL: VoiePreview -> numeros", numeros)
   const [bbox, setBbox] = useState(null)
 
   useEffect(() => {
